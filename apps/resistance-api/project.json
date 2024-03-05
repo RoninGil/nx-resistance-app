@@ -1,0 +1,24 @@
+{
+  "name": "resistance-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/resistance-api/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "resistance-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "resistance-api:build:development"
+        },
+        "production": {
+          "buildTarget": "resistance-api:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

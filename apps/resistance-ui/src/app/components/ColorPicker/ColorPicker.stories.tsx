@@ -15,9 +15,20 @@ const meta: Meta<typeof ColorPicker> = {
 
 type Story = StoryObj<typeof ColorPicker>;
 
-const Template = (args: JSX.IntrinsicAttributes) => <ColorPicker {...args} />;
+const colorsTest = [
+  {
+    name: 'red',
+  },
+  {
+    colorHexCode: '#000000',
+  },
+];
 
-export const OneItem: Story = {
+const Template = (args: JSX.IntrinsicAttributes) => (
+  <ColorPicker colorValues={colorsTest} {...args} />
+);
+
+export const Default: Story = {
   render: (args) => <Template />,
 };
 

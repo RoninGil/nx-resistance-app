@@ -1,0 +1,16 @@
+
+.color-wrapper{
+    width: 90px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 8px 8px;
+    gap: 10px;
+    border: 1px solid black;
+}
+
+.color-selector{
+    width: 20px;
+    height: 20px;
+}

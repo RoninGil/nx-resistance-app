@@ -3,6 +3,8 @@
     from a json file with plop
 */
 
+import { BandColors } from "../types/BandColors";
+
 /*
     color: {
         digitValue:0-9,
@@ -10,9 +12,6 @@
         tolerancePercentage: 20% => .01%,
     }
 */
-
-
-type BandColors = 'none'| 'pink'| 'silver'| 'gold'| 'black'| 'brown'| 'red'| 'orange'| 'yellow'| 'green'| 'blue'| 'violet'| 'gray'| 'white';
 
 type Resistor = {
     [key in BandColors]: {

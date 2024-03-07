@@ -1,0 +1,1 @@
+export type ColorPickerProps = {colorValues: ({name: string; colorHexCode?: string} | {name?: string; colorHexCode: string})[]};

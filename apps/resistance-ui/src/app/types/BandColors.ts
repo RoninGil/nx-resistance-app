@@ -1,0 +1,1 @@
+export type BandColors = 'none'| 'pink'| 'silver'| 'gold'| 'black'| 'brown'| 'red'| 'orange'| 'yellow'| 'green'| 'blue'| 'violet'| 'gray'| 'white';

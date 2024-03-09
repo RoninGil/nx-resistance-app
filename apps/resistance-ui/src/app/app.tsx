@@ -12,7 +12,7 @@ const colorsTest = [
 ];
 
 export function App() {
-  return <ColorPicker colorValues={colorsTest} />;
+  return <div>hola</div>;
 }
 
 export default App;

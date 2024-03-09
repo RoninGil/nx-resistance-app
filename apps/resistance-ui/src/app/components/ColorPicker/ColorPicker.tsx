@@ -9,18 +9,18 @@ import styles from './ColorPicker.module.scss';
 const cx = classNames.bind(styles);
 //[{name: 'red', colorHexCode: '#12ab...'},]
 
-const ColorPicker = ({ colorValues }: ColorPickerProps) => {
-  console.log(styles);
+const ColorPicker = ({ colorValues, onChange }: ColorPickerProps) => {
   return (
     <div className={cx('color-wrapper')}>
-      {colorValues.map(({ colorHexCode, name }) => {
+      {colorValues.map(({ name }) => {
         return (
           <div
-            key={name ?? colorHexCode}
+            key={name}
             className={cx('color-selector')}
             style={{
-              backgroundColor: colorHexCode ?? name,
+              backgroundColor: name,
             }}
+            onClick={() => onChange(name ?? '')}
           ></div>
         );
       })}

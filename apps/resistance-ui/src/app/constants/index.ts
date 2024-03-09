@@ -3,7 +3,7 @@
     from a json file with plop
 */
 
-import { BandColors } from "../types/BandColors";
+import { Resistor } from "../types/Resistor";
 
 /*
     color: {
@@ -13,14 +13,7 @@ import { BandColors } from "../types/BandColors";
     }
 */
 
-type Resistor = {
-    [key in BandColors]: {
-        digitValue?: number;
-        multiplier?: number;
-        tolerancePercentage?: number;
-    }
-};
-
+//Mock data
 export const BAND_COLOR_CODES: Resistor = {
     none:{
         digitValue: undefined,

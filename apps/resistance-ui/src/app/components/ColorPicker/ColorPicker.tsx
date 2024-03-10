@@ -7,20 +7,41 @@ import { ColorPickerProps } from '../../types/ColorPicker';
 import styles from './ColorPicker.module.scss';
 
 const cx = classNames.bind(styles);
-//[{name: 'red', colorHexCode: '#12ab...'},]
 
-const ColorPicker = ({ colorValues, onChange }: ColorPickerProps) => {
+const ColorPicker = ({
+  colorValues, //array of colors
+  bandType, //resitor, digit or multiplier
+  colorData, //object with colors as keys, and the color data as values
+  onChange,
+}: ColorPickerProps) => {
+  const colorsToDisplay = () => {
+    return colorValues.filter((color) => {
+      if (bandType === 'none') {
+        return true;
+      }
+      if (bandType === 'tolerance') {
+        return colorData[color].tolerancePercentage;
+      }
+      if (bandType === 'multiplier') {
+        return colorData[color].multiplier;
+      }
+      return colorData[color].digitValue;
+    });
+  };
   return (
     <div className={cx('color-wrapper')}>
-      {colorValues.map(({ name }) => {
+      {colorsToDisplay().map((color) => {
+        const noBand = color === 'none';
+        const backgroundColor = noBand ? 'transparent' : color;
         return (
           <div
-            key={name}
+            key={color}
             className={cx('color-selector')}
             style={{
-              backgroundColor: name,
+              backgroundColor,
+              border: '1px solid black',
             }}
-            onClick={() => onChange(name ?? '')}
+            onClick={() => onChange([color, colorData[color]])}
           ></div>
         );
       })}

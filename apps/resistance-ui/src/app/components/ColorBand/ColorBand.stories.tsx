@@ -1,9 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import ColorBand from './ColorBand';
 import { JSX } from 'react/jsx-runtime';
 import { BAND_COLOR_CODES } from '../../constants/index';
+import { ColorValues } from '../../types/Resistor';
+import { BandColors } from '../../types/BandColors';
 
 const meta: Meta<typeof ColorBand> = {
   /* 👇 The title prop is optional.
@@ -14,12 +16,34 @@ const meta: Meta<typeof ColorBand> = {
   component: ColorBand,
 };
 
+type AvailableColorBands = {
+  [key: string]: ColorValues & { color: string };
+};
+
 type Story = StoryObj<typeof ColorBand>;
 
 const Template = (args: JSX.IntrinsicAttributes) => {
+  const [selectedColor, setSelectedColor] = useState<AvailableColorBands>({});
   const [activeBand, setActiveBand] = useState('');
 
-  const colorBands = useMemo(() => Object.entries(BAND_COLOR_CODES), []);
+  const colorBands = useMemo(
+    () => Object.entries(selectedColor),
+    [selectedColor]
+  );
+
+  useEffect(() => {
+    const availableColorBands: AvailableColorBands = {};
+    let i = 1;
+    for (const [key, value] of Object.entries(BAND_COLOR_CODES)) {
+      availableColorBands[`band${i++}`] = {
+        digitValue: value.digitValue,
+        multiplier: value.multiplier,
+        tolerancePercentage: value.tolerancePercentage,
+        color: key,
+      };
+    }
+    setSelectedColor(availableColorBands);
+  }, []);
 
   return (
     <>
@@ -34,10 +58,11 @@ const Template = (args: JSX.IntrinsicAttributes) => {
         {colorBands.map(([key, values]) => {
           return (
             <ColorBand
-              bandColor={key}
+              bandColor={values.color as BandColors}
               bandKey={key}
-              // resistanceBandValues={values}
-              onClick={setActiveBand}
+              onClick={(band) => {
+                setActiveBand(band);
+              }}
             />
           );
         })}

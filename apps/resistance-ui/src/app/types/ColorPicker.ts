@@ -1,8 +1,11 @@
+import { BandColors } from "./BandColors";
+import { ColorValues, Resistor } from "./Resistor";
+
+export type ActiveBand = 'tolerance' | 'multiplier' | 'digit' | 'none';
+
 export type ColorPickerProps = {
-    colorValues: (
-        {
-            name: string; 
-        }
-    )[];
-    onChange: (value: string)=> void;
+    colorValues: BandColors[];
+    bandType: ActiveBand;
+    colorData: Resistor;
+    onChange: (value: [string, ColorValues])=> void;
 };

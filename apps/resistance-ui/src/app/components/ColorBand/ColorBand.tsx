@@ -1,8 +1,9 @@
 import React from 'react';
+import { BandColors } from '../../types/BandColors';
 // import { ColorValues } from '../../types/Resistor';
 
 type ColorBandProps = {
-  bandColor: string;
+  bandColor: BandColors;
   bandKey: string;
   onClick: (value: string) => void;
 };

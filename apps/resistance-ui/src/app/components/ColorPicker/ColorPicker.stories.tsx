@@ -4,10 +4,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import ColorPicker from './ColorPicker';
 import { JSX } from 'react/jsx-runtime';
 
-import styles from './ColorPicker.module.scss';
 import ColorBand from '../ColorBand/ColorBand';
 
 import { BAND_COLOR_CODES } from '../../constants/index';
+import { BandColors } from '../../types/BandColors';
 import { ColorValues } from '../../types/Resistor';
 
 const meta: Meta<typeof ColorPicker> = {
@@ -22,23 +22,10 @@ const meta: Meta<typeof ColorPicker> = {
 type Story = StoryObj<typeof ColorPicker>;
 
 type AvailableColorBands = {
-  [key: string]: string;
+  [key: string]: ColorValues & { color: string };
 };
 
-const colorsTest = [
-  {
-    name: 'red',
-  },
-  {
-    name: 'black',
-  },
-  {
-    name: 'blue',
-  },
-  {
-    name: 'yellow',
-  },
-];
+const colorsTest: BandColors[] = ['red', 'black', 'blue', 'yellow'];
 
 const Template = (args: JSX.IntrinsicAttributes) => {
   const [selectedColor, setSelectedColor] = useState<AvailableColorBands>({});
@@ -51,13 +38,55 @@ const Template = (args: JSX.IntrinsicAttributes) => {
   );
   console.log('COLOR BANDS: ', colorBands);
 
+  //tolerance value will be the last element of the array
+  const toleranceValue = useMemo(
+    () =>
+      colorBands[colorBands.length - 1]
+        ? colorBands[colorBands.length - 1]
+        : [],
+    [colorBands]
+  );
+
+  //multiplier value will be the second to last element of the array
+  const multiplierValue = useMemo(
+    () =>
+      colorBands[colorBands.length - 2]
+        ? colorBands[colorBands.length - 2]
+        : [],
+    [colorBands]
+  );
+
+  //multiplier value will be the second to last element of the array
+  const resistanceValues = useMemo(
+    () => colorBands.slice(0, -2).map(([key, value]) => value),
+    [colorBands]
+  );
+
+  const getBandType = () => {
+    if (activeBand === toleranceValue[0]) {
+      return 'tolerance';
+    }
+    if (activeBand === multiplierValue[0]) {
+      return 'multiplier';
+    }
+    if (activeBand === '') {
+      return 'none';
+    }
+    return 'digit';
+  };
+
   //sets selectedColor with the object configuration depending on the amount of bands
   useEffect(() => {
     const bandColorCodes = Object.entries(BAND_COLOR_CODES);
     const availableColorBands: AvailableColorBands = {};
 
     for (let i = 1; i <= bandColorCodes.length; i++) {
-      availableColorBands[`band${i}`] = '';
+      availableColorBands[`band${i}`] = {
+        digitValue: undefined,
+        multiplier: undefined,
+        tolerancePercentage: undefined,
+        color: '',
+      };
     }
     console.log('AVAILABLE: ', availableColorBands);
     setSelectedColor(availableColorBands);
@@ -73,12 +102,11 @@ const Template = (args: JSX.IntrinsicAttributes) => {
           justifyContent: 'center',
         }}
       >
-        {colorBands.map(([key, value]) => (
+        {colorBands.map(([key, values]) => (
           <ColorBand
-            bandColor={value}
+            bandColor={values.color as BandColors}
             bandKey={key}
             onClick={(band) => {
-              console.log('UWU: ', band);
               setActiveBand(band);
             }}
           />
@@ -86,11 +114,17 @@ const Template = (args: JSX.IntrinsicAttributes) => {
       </div>
       <ColorPicker
         colorValues={colorsTest}
-        onChange={(value) =>
+        colorData={BAND_COLOR_CODES}
+        bandType={getBandType()}
+        onChange={([color, colorData]) =>
           setSelectedColor((prev) => {
             return {
               ...prev,
-              [activeBand]: value,
+              [activeBand]: {
+                ...prev[activeBand],
+                color: color as BandColors,
+                ...colorData,
+              },
             };
           })
         }

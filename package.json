@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start:storybook": "nx run resistance-ui:storybook"
+    "start:storybook": "nx run resistance-ui:storybook",
+    "start:ui": "nx serve resistance-ui",
+    "start:api": "nx serve resistance-api"
   },
   "private": true,
   "dependencies": {

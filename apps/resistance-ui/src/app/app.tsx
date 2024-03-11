@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useEffect, useMemo, useState } from 'react';
-import { ColorBand, ColorPicker } from './components';
+import { ColorBand, ColorPicker, Resistance } from './components';
 import { BAND_COLOR_CODES } from './constants';
 import { BandColors } from './types/BandColors';
 import { useHandleApiValues } from './hooks/useHandleApiValues';
@@ -31,14 +31,7 @@ const App = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: 'flex',
-          gap: '8px',
-          marginBottom: '8px',
-          justifyContent: 'center',
-        }}
-      >
+      <Resistance>
         {colorBands.map(([key, values]) => (
           <ColorBand
             bandColor={values.color as BandColors}
@@ -48,7 +41,7 @@ const App = () => {
             }}
           />
         ))}
-      </div>
+      </Resistance>
       <ColorPicker
         colorValues={colorValues}
         colorData={mockApiData}

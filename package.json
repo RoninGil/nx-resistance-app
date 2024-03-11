@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start:storybook":"nx run resistance-ui:storybook"
+    "start:storybook": "nx run resistance-ui:storybook",
+    "start:ui": "nx serve resistance-ui",
+    "start:api": "nx serve resistance-api"
   },
   "private": true,
   "dependencies": {
@@ -11,6 +13,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "axios": "^1.6.0",
+    "classnames": "^2.5.1",
     "express": "^4.18.1",
     "framer-motion": "^11.0.8",
     "react": "18.2.0",
@@ -64,7 +67,7 @@
     "nx": "18.0.7",
     "prettier": "^2.6.2",
     "react-refresh": "^0.10.0",
-    "sass": "^1.55.0",
+    "sass": "^1.71.1",
     "storybook": "^7.5.3",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",

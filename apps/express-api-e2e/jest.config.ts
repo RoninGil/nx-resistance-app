@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'resistance-api-e2e',
+  displayName: 'express-api-e2e',
   preset: '../../jest.preset.js',
   globalSetup: '<rootDir>/src/support/global-setup.ts',
   globalTeardown: '<rootDir>/src/support/global-teardown.ts',
@@ -15,5 +15,5 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/resistance-api-e2e',
+  coverageDirectory: '../../coverage/express-api-e2e',
 };

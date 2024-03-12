@@ -59,7 +59,7 @@ const App = () => {
           })
         }
       />
-      <span>{activeBand}</span>
+      <span>Selected Band: {activeBand}</span>
       <br />
       {areAllBandsWithColor() && (
         <>

@@ -7,6 +7,7 @@ import { Resistor } from '../types/Resistor';
 //in case the api fails, the mock data will take its place. just for evaluation purposes
 const initialState = BAND_COLOR_CODES;
 
+//TODO: create DTO for the api. Implement axios.
 export const useHandleApiValues = () => {
     const [resistanceValues, setResistanceValues] = useState<Resistor>(initialState);
 

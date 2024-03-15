@@ -1,8 +1,15 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { BandColors } from '../types/BandColors';
+import { BAND_COLOR_CODES } from '../constants';
 
+import { BandColors } from '../types/BandColors';
+import { Resistor } from '../types/Resistor';
+
+//in case the api fails, the mock data will take its place. just for evaluation purposes
+const initialState = BAND_COLOR_CODES;
+
+//TODO: create DTO for the api. Implement axios.
 export const useHandleApiValues = () => {
-    const [resistanceValues, setResistanceValues] = useState<BandColors[]>([]);
+    const [resistanceValues, setResistanceValues] = useState<Resistor>(initialState);
 
     const colorValues = useMemo(()=>{
         const colorValuesArray: BandColors[] = [];
@@ -16,15 +23,24 @@ export const useHandleApiValues = () => {
 
     //set the color values for ColorPicker component as the ones that come from the api
     useEffect(() => {
-        const getResistanceData = async()=>{
-            const response = await fetch('http://localhost:3333/api/resistanceValues');
-            const {data: resistanceData} = await response.json();
-            delete resistanceData._id;
+        const getResistanceData = async()=>{ 
+            let resistanceValuesData = initialState;
+            try {
+                const response = await fetch('http://localhost:3333/api/resistanceValues');
+                const {data: resistanceData} = await response.json();
+                //by default, mongo adds a property ._id to the database object, which we don't need for the ui in this case
+                delete resistanceData._id;
+                resistanceValuesData = resistanceData;
+            } catch {
+                window.alert('API failed.');
+            } finally{
+                setResistanceValues(resistanceValuesData);
+
+            }
             
-            setResistanceValues(resistanceData);
         }
         getResistanceData()
     }, []);
     
-    return {colorValues}
+    return {colorValues, resistanceValues}
 }

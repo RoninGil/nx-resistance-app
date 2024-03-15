@@ -1,0 +1,35 @@
+import { Canvas, Meta, Story } from '@storybook/blocks';
+
+import * as ColorPickerStories from "./ColorPicker.stories";
+
+<Meta title={'ColorPicker'} />
+
+# ColorPicker Component
+
+The **_`<ColorPicker >`_** component will display the expected bands of color needed for the resistance.
+
+The properties available for this component are:
+
+**colorValues** _(required|String[])_:This property will require an array of strings containing one of the possible colors to render, the possible values are defined by a Type as the following:
+-   'none'| 'pink'| 'silver'| 'gold'| 'black'| 'brown'| 'red'| 'orange'| 'yellow'| 'green'| 'blue'| 'violet'| 'gray'| 'white'
+
+**bandType** _(required|String)_:This property will require a string containing the name or identifier of the currently selected band.
+
+**colorData** _(required|Object)_:This property will require an object with the color of the bands as Keys, and the corresponding color values. In general, it will look as the following
+```
+  {
+    brown: {
+        digitValue: 1,
+        multiplier: 10,
+        tolerancePercentage: 1
+    },
+  }
+```
+
+**onChange** _(required|(value: [string, ColorValues]) => void)_:This property will require a callback that will trigger when the color option is clicked
+
+<Canvas >
+    <Story 
+    id='colorpicker--main'
+    />
+</Canvas>

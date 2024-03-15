@@ -1,11 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { ColorValues } from '../types/Resistor';
+import React, { useEffect, useMemo, useState } from 'react';
+import { AvailableColorBands } from '../types/AvailableColorBands';
 
-type AvailableColorBands = {
-    [key: string]: ColorValues & { color: string };
-  };
-
-  const resistanceBandsAmount = 4;
+//TODO: this value can be changed to 5, but for any other amount of bands
+//some extra validations would be needed
+const resistanceBandsAmount = 4;
 
 export const useAvailableColorBands = () => {
     const [selectedColor, setSelectedColor] = useState<AvailableColorBands>({});
@@ -45,6 +43,7 @@ export const useAvailableColorBands = () => {
           : false;
       };
 
+    //initial values for color bands
     useEffect(() => {
         const availableColorBands: AvailableColorBands = {};
 

@@ -1,17 +1,4 @@
-/*
-    TODO: investigate how to automatically generate the following object 
-    from a json file with plop
-*/
-
 import { Resistor } from "../types/Resistor";
-
-/*
-    color: {
-        digitValue:0-9,
-        multiplier: Math.pow(10, -3 => 9) or .001 => 1000000000,
-        tolerancePercentage: 20% => .01%,
-    }
-*/
 
 //Mock data
 export const BAND_COLOR_CODES: Resistor = {

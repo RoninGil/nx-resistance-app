@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Resistance from './Resistance';
 import { JSX } from 'react/jsx-runtime';
+import { useAvailableColorBands } from '../../hooks/useAvailableColorBands';
+import ColorBand from '../ColorBand/ColorBand';
+import { BandColors } from '../../types/BandColors';
 
 const meta: Meta<typeof Resistance> = {
-  /* 👇 The title prop is optional.
-   * See https://storybook.js.org/docs/configure/#configure-story-loading
-   * to learn how to generate automatic titles
-   */
   title: 'Resistance',
   component: Resistance,
 };
 
 type Story = StoryObj<typeof Resistance>;
 
-const Template = (args: JSX.IntrinsicAttributes) => <Resistance {...args} />;
+const Template = (args: JSX.IntrinsicAttributes) => {
+  const { colorBands } = useAvailableColorBands();
 
-export const OneItem: Story = {
+  const [, setActiveBand] = useState('');
+
+  return (
+    <Resistance {...args}>
+      {colorBands.map(([key, values]) => (
+        <ColorBand
+          bandColor={values.color as BandColors}
+          bandKey={key}
+          onClick={(band) => {
+            setActiveBand(band);
+          }}
+        />
+      ))}
+    </Resistance>
+  );
+};
+
+export const Main: Story = {
   render: (args) => <Template />,
 };
 

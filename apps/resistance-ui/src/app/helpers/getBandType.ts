@@ -1,4 +1,4 @@
-import { ColorValues } from "../types/Resistor";
+import { ColorValues } from "../types/ColorValues";
 
 type ArrayValues = [string, ColorValues & {
     color: string;

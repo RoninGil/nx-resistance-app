@@ -1,0 +1,24 @@
+import { Canvas, Meta, Story } from '@storybook/blocks';
+
+import * as ColorBandStories from "./ColorBand.stories";
+
+<Meta title={'ColorBand'} />
+
+# ColorBand Component
+
+The **_`<ColorBand >`_** component will display the expected bands of color needed for the resistance.
+
+The properties available for this component are:
+
+**bandColor** _(required|String)_:This property will require a string containing one of the possible colors to render, the possible values are defined by a Type as the following:
+-   'none'| 'pink'| 'silver'| 'gold'| 'black'| 'brown'| 'red'| 'orange'| 'yellow'| 'green'| 'blue'| 'violet'| 'gray'| 'white'
+
+**bandKey** _(required|String)_:This property will require a string containing the name or identifier of the current band.
+
+**onClick** _(required|(value: string) => void)_:This property will require a callback that will trigger when the band is clicked
+
+<Canvas >
+    <Story 
+    id='colorband--main'
+    />
+</Canvas>

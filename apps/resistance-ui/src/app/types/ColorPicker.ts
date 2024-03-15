@@ -1,7 +1,8 @@
 import { BandColors } from "./BandColors";
-import { ColorValues, Resistor } from "./Resistor";
+import { ColorValues } from "./ColorValues";
+import { Resistor } from "./Resistor";
 
-export type ActiveBand = 'tolerance' | 'multiplier' | 'digit' | 'none';
+type ActiveBand = 'tolerance' | 'multiplier' | 'digit' | 'none';
 
 export type ColorPickerProps = {
     colorValues: BandColors[];

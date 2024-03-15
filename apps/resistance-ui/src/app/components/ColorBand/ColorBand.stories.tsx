@@ -1,17 +1,15 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import { JSX } from 'react/jsx-runtime';
 
 import ColorBand from './ColorBand';
-import { JSX } from 'react/jsx-runtime';
+
 import { BAND_COLOR_CODES } from '../../constants/index';
-import { ColorValues } from '../../types/Resistor';
+
+import { ColorValues } from '../../types/ColorValues';
 import { BandColors } from '../../types/BandColors';
 
 const meta: Meta<typeof ColorBand> = {
-  /* 👇 The title prop is optional.
-   * See https://storybook.js.org/docs/configure/#configure-story-loading
-   * to learn how to generate automatic titles
-   */
   title: 'ColorBand',
   component: ColorBand,
 };
@@ -67,12 +65,12 @@ const Template = (args: JSX.IntrinsicAttributes) => {
           );
         })}
       </div>
-      <span>{activeBand}</span>
+      <span>Selected Band: {activeBand}</span>
     </>
   );
 };
 
-export const OneItem: Story = {
+export const Main: Story = {
   render: (args) => <Template />,
 };
 

@@ -1,0 +1,19 @@
+import { Canvas, Meta, Story } from '@storybook/blocks';
+
+import * as ResistanceStories from "./Resistance.stories";
+
+<Meta title={'Resistance'} />
+
+# Resistance Component
+
+The **_`<Resistance >`_** component is a wrapper for the **_`<ColorBand >`_** component. It will only supply a general wrapper and some styling.
+
+The properties available for this component are:
+
+**children** _(required|ReactNode)_:This property will only serve the purpose of rendering the passed children. It is meant to render only ColorBand components.
+
+<Canvas >
+    <Story 
+    id='resistance--main'
+    />
+</Canvas>

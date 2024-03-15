@@ -5,7 +5,9 @@
   "scripts": {
     "start:storybook": "nx run resistance-ui:storybook",
     "start:ui": "nx serve resistance-ui",
-    "start:api": "nx serve express-api"
+    "start:api": "nx serve express-api",
+    "start:app":"nx serve resistance-ui && nx serve express-api",
+    "cypress:run": "nx e2e resistance-ui-e2e"
   },
   "private": true,
   "dependencies": {
